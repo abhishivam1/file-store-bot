@@ -34,6 +34,7 @@ DB_NAME = os.environ.get("DATABASE_NAME", "filesharexbot")
 #force sub channel id, if you want enable force sub
 FORCE_SUB_CHANNEL = int(os.environ.get("FORCE_SUB_CHANNEL", "0"))
 FORCE_SUB_CHANNEL2 = int(os.environ.get("FORCE_SUB_CHANNEL", "0"))
+CHANNEL2 = os.environ.get("CHANNEL2", "")
 
 TG_BOT_WORKERS = int(os.environ.get("TG_BOT_WORKERS", "4"))
 
