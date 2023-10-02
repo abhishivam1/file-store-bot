@@ -30,6 +30,7 @@ async def start_command(client: Client, message: Message):
             pass
     text = message.text
     ok = await client.get_chat_member(chat_id = FORCE_SUB_CHANNEL2, user_id = id)
+    print(FORCE_SUB_CHANNEL2)
     print(ok.status)
     if not ok.status in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.MEMBER]:
         buttons = [
