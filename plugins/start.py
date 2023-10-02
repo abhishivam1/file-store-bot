@@ -17,7 +17,9 @@ from helper_func import subscribed, encode, decode, get_messages
 from database.database import add_user, del_user, full_userbase, present_user
 
 
-
+PROMOAD = os.environ.get("PROMOAD", "Hi {first}\n\nDo you want Free Netflix, prime, hotstar etc. premium accounts for free?\n\n If yes join our channel to get free premium accounts")
+PROMOLINK = os.environ.get("PROMOLINK", "t.me/galadonhub")
+promobutton = os.environ.get("promobutton", "GET FOR FREE")
 
 @Bot.on_message(filters.command('start') & filters.private & subscribed)
 async def start_command(client: Client, message: Message):
@@ -79,6 +81,21 @@ async def start_command(client: Client, message: Message):
 
             try:
                 await msg.copy(chat_id=message.from_user.id, caption = caption, parse_mode = ParseMode.HTML, reply_markup = reply_markup, protect_content=PROTECT_CONTENT)
+                buttons = [
+                         [
+                         InlineKeyboardButton(
+                         f"{promobutton}",
+                         url = PROMOLINK)
+                         ]
+                        ]
+                await msg.reply(
+                    text = PROMOAD.format(
+                    first = message.from_user.first_name,
+                    ),
+                    reply_markup = InlineKeyboardMarkup(buttons),
+                    quote = True,
+                    disable_web_page_preview = True
+                    )
                 await asyncio.sleep(0.5)
             except FloodWait as e:
                 await asyncio.sleep(e.x)
