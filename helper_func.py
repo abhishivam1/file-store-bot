@@ -20,11 +20,8 @@ async def is_subscribed(filter, client, update):
         member2 = await client.get_chat_member(chat_id = FORCE_SUB_CHANNEL2, user_id = user_id)
         if not member.status in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.MEMBER]:
             return False
-        
-        if not member2.status in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.MEMBER]:
+        elif not member2.status in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.MEMBER]:
             return False
-        else:
-            return True
     except UserNotParticipant:
         return False
 
@@ -116,4 +113,3 @@ def get_readable_time(seconds: int) -> str:
 
 
 subscribed = filters.create(is_subscribed)
-subscribed2 = filters.create(is_subscribed)
