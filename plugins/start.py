@@ -88,7 +88,7 @@ async def start_command(client: Client, message: Message):
                          url = PROMOLINK)
                          ]
                         ]
-                await msg.reply(
+                await message.reply(
                     text = PROMOAD.format(
                     first = message.from_user.first_name,
                     ),
