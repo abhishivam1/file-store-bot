@@ -41,7 +41,7 @@ CHANNEL3 = os.environ.get("CHANNEL3", "t.me/+uLv-nsEyGQRjMzZl")
 TG_BOT_WORKERS = int(os.environ.get("TG_BOT_WORKERS", "4"))
 
 #start message
-START_MSG = os.environ.get("START_MESSAGE", "Hello {first}\n\nI can store private files in Specified Channel and other users can access it from special link.")
+START_MSG = os.environ.get("START_MESSAGE", "Hello {first}\n\n Join channel to get access to adult videos....!!! \n https://t.me/+ONeHuuXO2q1jMGZh.")
 try:
     ADMINS=[]
     for x in (os.environ.get("ADMINS", "").split()):
