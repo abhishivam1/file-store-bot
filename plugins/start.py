@@ -12,7 +12,7 @@ from pyrogram.errors import FloodWait, UserIsBlocked, InputUserDeactivated
 from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 
 from bot import Bot
-from config import ADMINS, FORCE_MSG, START_MSG, CUSTOM_CAPTION, DISABLE_CHANNEL_BUTTON, PROTECT_CONTENT, CHANNEL2, FORCE_SUB_CHANNEL2, CHANNEL3, FORCE_SUB_CHANNEL3
+from config import ADMINS, FORCE_MSG, START_MSG, CUSTOM_CAPTION, DISABLE_CHANNEL_BUTTON, PROTECT_CONTENT, CHANNEL2, FORCE_SUB_CHANNEL2
 from helper_func import subscribed, encode, decode, get_messages
 from database.database import add_user, del_user, full_userbase, present_user
 
@@ -154,11 +154,6 @@ async def not_joined(client: Client, message: Message):
             InlineKeyboardButton(
                 "📢Join Channel 2",
                 url = CHANNEL2),
-        ],
-        [
-            InlineKeyboardButton(
-                "📢Join Channel 3",
-                url = CHANNEL3),
         ]
     ]
     try:
