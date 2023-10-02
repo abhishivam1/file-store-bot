@@ -6,21 +6,25 @@
 import os
 import asyncio
 from pyrogram import Client, filters, __version__
-from pyrogram.enums import ParseMode
+from pyrogram.enums import ParseMode, ChatMemberStatus
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from pyrogram.errors import FloodWait, UserIsBlocked, InputUserDeactivated
+from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 
 from bot import Bot
-from config import ADMINS, FORCE_MSG, START_MSG, CUSTOM_CAPTION, DISABLE_CHANNEL_BUTTON, PROTECT_CONTENT, CHANNEL2
-from helper_func import subscribed, subscribed2, encode, decode, get_messages
+from config import ADMINS, FORCE_MSG, START_MSG, CUSTOM_CAPTION, DISABLE_CHANNEL_BUTTON, PROTECT_CONTENT, CHANNEL2, FORCE_SUB_CHANNEL2, CHANNEL3, FORCE_SUB_CHANNEL3
+from helper_func import subscribed, encode, decode, get_messages
 from database.database import add_user, del_user, full_userbase, present_user
 
 
+PROMOAD = os.environ.get("PROMOAD", "Hi {first}\n\nDo you want Free Netflix, prime, hotstar etc. premium accounts for free?\n\n If yes join our channel to get free premium accounts")
+PROMOLINK = os.environ.get("PROMOLINK", "t.me/galadonhub")
+promobutton = os.environ.get("promobutton", "GET FOR FREE")
 
-
-@Bot.on_message(filters.command('start') & filters.private & subscribed & subscribed2)
+@Bot.on_message(filters.command('start') & filters.private & subscribed)
 async def start_command(client: Client, message: Message):
     id = message.from_user.id
+    print(id)
     if not await present_user(id):
         try:
             await add_user(id)
@@ -77,6 +81,21 @@ async def start_command(client: Client, message: Message):
 
             try:
                 await msg.copy(chat_id=message.from_user.id, caption = caption, parse_mode = ParseMode.HTML, reply_markup = reply_markup, protect_content=PROTECT_CONTENT)
+                buttons = [
+                         [
+                         InlineKeyboardButton(
+                         f"{promobutton}",
+                         url = PROMOLINK)
+                         ]
+                        ]
+                await message.reply(
+                    text = PROMOAD.format(
+                    first = message.from_user.first_name,
+                    ),
+                    reply_markup = InlineKeyboardMarkup(buttons),
+                    quote = True,
+                    disable_web_page_preview = True
+                    )
                 await asyncio.sleep(0.5)
             except FloodWait as e:
                 await asyncio.sleep(e.x)
@@ -125,11 +144,16 @@ async def not_joined(client: Client, message: Message):
             InlineKeyboardButton(
                 "📢Join Channel",
                 url = client.invitelink)
-        ]
+        ],
         [
             InlineKeyboardButton(
                 "📢Join Channel 2",
                 url = CHANNEL2),
+        ],
+        [
+            InlineKeyboardButton(
+                "📢Join Channel 3",
+                url = CHANNEL3),
         ]
     ]
     try:
