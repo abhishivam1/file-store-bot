@@ -18,7 +18,7 @@ from database.database import add_user, del_user, full_userbase, present_user
 
 
 PROMOAD = os.environ.get("PROMOAD", "Hi {first}\n\nDo you want Free Netflix, prime, hotstar etc. premium accounts for free?\n\n If yes join our channel to get free premium accounts")
-PROMOLINK = os.environ.get("PROMOLINK", "t.me/galadonhub")
+PROMOLINK = os.environ.get("PROMOLINK", "https://t.me/addlist/J14VQiVLrapkY2E9")
 promobutton = os.environ.get("promobutton", "GET FOR FREE")
 
 @Bot.on_message(filters.command('start') & filters.private & subscribed)
